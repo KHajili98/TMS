@@ -3,6 +3,7 @@ package org.example.tms.controller;
 import org.example.tms.dto.UserDTO;
 import org.example.tms.entity.User;
 import org.example.tms.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +30,8 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        UserDTO createdUser = userService.createUser(userDTO);
-        return ResponseEntity.ok(createdUser);
+        System.out.println(userDTO.toString());
+        return new ResponseEntity<>( userService.createUser(userDTO),HttpStatus.CREATED);
     }
 
     // Additional CRUD endpoints
