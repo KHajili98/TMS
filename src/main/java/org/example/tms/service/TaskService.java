@@ -5,6 +5,7 @@ import org.example.tms.dto.TaskDTO;
 import org.example.tms.dto.UserDTO;
 import org.example.tms.entity.Task;
 import org.example.tms.entity.User;
+import org.example.tms.exception.network.CustomEntityNotFoundException;
 import org.example.tms.mapper.TaskMapper;
 import org.example.tms.repository.TaskRepository;
 import org.example.tms.repository.UserRepository;
@@ -29,7 +30,7 @@ public class TaskService {
     }
 
     public Task getTaskById(Long id) {
-        return taskRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Task not found"));
+        return taskRepository.findById(id).orElseThrow(() ->  new CustomEntityNotFoundException(Task.class, id));
     }
     public TaskDTO createTask (TaskDTO taskDTO) {
         Task task = taskMapper.toEntity(taskDTO);

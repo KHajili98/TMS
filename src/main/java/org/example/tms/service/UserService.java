@@ -2,7 +2,9 @@ package org.example.tms.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.example.tms.dto.UserDTO;
+import org.example.tms.entity.Task;
 import org.example.tms.entity.User;
+import org.example.tms.exception.network.CustomEntityNotFoundException;
 import org.example.tms.mapper.UserMapper;
 import org.example.tms.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -25,7 +27,7 @@ public class UserService {
     }
 
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        return userRepository.findById(id).orElseThrow(() ->  new CustomEntityNotFoundException(User.class, id));
     }
 
     public UserDTO createUser(UserDTO userDTO) {
