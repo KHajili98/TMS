@@ -3,6 +3,7 @@ package org.example.tms.service;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.example.tms.dto.UserDTO;
+import org.example.tms.dto.UserMapper;
 import org.example.tms.entity.User;
 import org.example.tms.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -33,12 +34,12 @@ public class UserService {
     }
 
     public UserDTO createUser(UserDTO userDTO) {
+        UserMapper mapper = new UserMapper();
 
-
-        User user = userMapper.map(userDTO, User.class);
+        User user = mapper.mapToUser(userDTO);
         System.out.println(user);
         User savedUser = userRepository.save(user);
-        return userMapper.map(savedUser, UserDTO.class);
+        return mapper.mapToUserDto(savedUser);
     }
 
 }
