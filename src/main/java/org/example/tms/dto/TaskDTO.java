@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskDTO {
-    private Long id;
     private String title;
     private String description;
     private LocalDateTime dueDate;
